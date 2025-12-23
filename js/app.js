@@ -7,3 +7,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   todoListElement.innerHTML = ulItems;
 });
+
+const time = document.getElementById("time");
