@@ -1,11 +1,11 @@
-const TODO_LIST_ITEMS = ["점심 맛있게 먹기", "저녁 더 맛있게 먹기"];
+const TODO_ITEMS = ["점심 맛있게 먹기", "저녁 맛있게 먹기"];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const todoListElement = document.querySelector(".todo");
-  const listItems = TODO_LIST_ITEMS.map((item) => `<li>${item}</li>`).join("");
-  const ulItems = `<ul>${listItems}</ul>`;
+const todo = document.getElementById("todo");
 
-  todoListElement.innerHTML = ulItems;
-});
+console.log("todo: ", todo);
 
-const time = document.getElementById("time");
+const todoHtml = TODO_ITEMS.map((item) => (
+  <p class="text-white text-[50px] text-bold">{item}</p>
+)).join("");
+
+todo.innerHTML = todoHtml;
