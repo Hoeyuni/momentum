@@ -31,3 +31,7 @@
 
 - 노마드코더 momentum 강의를 듣기 시작했다.
 - 먼저 강의를 들으며 html에 javascript를 적용하는 방법을 배워야겠다.
+
+## 12.29
+
+- Momentum 강의를 듣는 거는 결국 따라하는 거 밖에 안되니, html에 javascript를 적용하는 거 부터 봐야겠다.

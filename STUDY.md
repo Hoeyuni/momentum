@@ -14,3 +14,12 @@
   - html에서 항목을 가져오는 방법
     - document에서 항목들을 가져오기
     - 이 document에서 항목들 변경하기
+
+## 12.29
+
+- innerText, innerHtml
+  - innerText: 요소의 텍스트만 가져온다.
+  - innerHtml: 요소의 HTML 마크업을 가져온다.
+    뭘 써야할까?
+  - innerText: 이 경우엔 텍스트만 다루므로, 단순히 텍스트만 변경시에 유리
+  - innerHtml을 쓸 경우, html 태그를 넣으면 브라우저가 이를 파싱해서 실제 요소로 만들어준다. 새로운 DOM 요소를 생성
