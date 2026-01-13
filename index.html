@@ -8,14 +8,18 @@
 </head>
 
 <body class="w-full h-screen">
-    <section class="overflow-hidden size-full flex items-center justify-center relative">
+    <section class="overflow-hidden size-full flex flex-col justify-center items-center relative">
         <img src="/assets/webp/example1.webp" alt="Background Img"
             class="absolute inset-0 w-full h-full object-cover -z-10">
         <div id="todo" class="flex flex-col space-y-3">
         </div>
+        <form id="todoForm" class="absolute bottom-5 w-full flex justify-center space-x-2">
+            <input id="todoInput" type="text" class="bg-transparent border-b border-white text-white" />
+            <button type="submit" class="bg-white p-2 rounded-[10px]">저장</button>
+        </form>
 
     </section>
-    <script src="/js/app.js" defer></script>
+    <script src="/js/app.js" defer type="module"></script>
 </body>
 
 </html>
