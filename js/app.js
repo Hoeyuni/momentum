@@ -10,7 +10,6 @@ console.log("TODO_LIST: ", TODO_LIST);
 
 if (TODO_LIST) {
   const parsedTodoList = JSON.parse(TODO_LIST);
-  console.log("parsedTodoList: ", parsedTodoList);
   todos = parsedTodoList;
   todos.forEach((item) => paintTodoList(item));
 }
@@ -40,14 +39,32 @@ function saveTodo() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-function deleteTodo() {
+function deleteTodo(e) {
   //  X 버튼을 누르면 삭제되게끔 해야 함
+  // 버튼의 부모는 div 버튼을 누르면 div가 삭제 div의 아이디 찾기
+
   // 1. id를 찾아야 함
   // 2. X 버튼을 누른 id에 맞는 아이템을 배열에서 삭제함
   // 3. 삭제되자마자 화면에서 사라져야함
   // 3-1. 그말은 배열에서 삭제되고 필터링해서 보여줘야함
   // 4. 삭제하고 나서 배열을 다시 저장함
-  // 버튼의 부모는 div 버튼을 누르면 div가 삭제 div의 아이디 찾기
+
+  const todo = e.target.parentElement;
+  console.log("deleteTodo todo: ", todo);
+  todo.remove();
+  // 화면에서 div 자체(dom)을 지워버리니 화면에서는 사라지는데, localStorage에는 남아있음
+  // localStorage에서도 지워야 함
+  // key:todos, value: [{id:..., text:...}, {...}, {...}]
+  console.log("deleteTodo todos:", todos);
+  console.log("deleteTodo todo.id:", todo.id);
+
+  todos = todos.filter((item) => {
+    item.id !== todo.id;
+    console.log("item.id", item.id);
+    console.log("todo.id", todo.id);
+  });
+
+  console.log("deleteTodo after filter todos: ", todos);
 }
 
 todoForm.addEventListener("submit", (e) => {
