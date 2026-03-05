@@ -1,12 +1,11 @@
 const todoForm = document.getElementById("todoForm");
 const todoInput = document.getElementById("todoInput");
 const todo = document.getElementById("todo");
+const clock = document.getElementById("clock");
 
 let todos = [];
 
 const TODO_LIST = localStorage.getItem("todos");
-
-console.log("TODO_LIST: ", TODO_LIST);
 
 if (TODO_LIST) {
   const parsedTodoList = JSON.parse(TODO_LIST);
@@ -33,48 +32,23 @@ function paintTodoList(newTodo) {
   todo.appendChild(todoDiv);
 }
 
-console.log("todos: ", todos);
-
 function saveTodo() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 function deleteTodo(e) {
-  //  X 버튼을 누르면 삭제되게끔 해야 함
-  // 버튼의 부모는 div 버튼을 누르면 div가 삭제 div의 아이디 찾기
-
-  // 1. id를 찾아야 함
-  // 2. X 버튼을 누른 id에 맞는 아이템을 배열에서 삭제함
-  // 3. 삭제되자마자 화면에서 사라져야함
-  // 3-1. 그말은 배열에서 삭제되고 필터링해서 보여줘야함
-  // 4. 삭제하고 나서 배열을 다시 저장함
-
   const todo = e.target.parentElement;
-  console.log("deleteTodo todo: ", todo);
   todo.remove();
-  // 화면에서 div 자체(dom)을 지워버리니 화면에서는 사라지는데, localStorage에는 남아있음
-  // localStorage에서도 지워야 함
-  // key:todos, value: [{id:..., text:...}, {...}, {...}]
-  console.log("deleteTodo todos:", todos);
-  console.log("deleteTodo todo.id:", todo.id);
 
   todos = todos.filter((item) => {
-    // item.id !== todo.id
-    console.log("item.id", item.id);
-    console.log("item.id", typeof item.id);
-    console.log("todo.id", todo.id);
-    console.log("todo.id", typeof todo.id);
-
     return item.id !== +todo.id;
   });
-  console.log("deleteTodo after filter todos: ", todos);
 
   saveTodo();
 }
 
 todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("e: ", e.target.value);
   const newTodo = {
     id: Math.random(),
     text: todoInput.value,
@@ -89,4 +63,28 @@ todoForm.addEventListener("submit", (e) => {
   saveTodo();
 });
 
-console.log("after submit todos: ", todos);
+function getTime() {
+  const time = new Date();
+  const year = String(time.getFullYear());
+  const month = String(time.getMonth() + 1);
+  const date = String(time.getDate());
+
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
+  const day = days[time.getDay()];
+
+  const hour = String(time.getHours());
+  const minute = String(time.getMinutes());
+  const second = String(time.getSeconds());
+
+  console.log("year: ", year);
+  console.log("month: ", month);
+  console.log("date ", date);
+  console.log("day: ", day);
+  console.log("hour: ", hour);
+  console.log("minute: ", minute);
+  console.log("second: ", second);
+
+  clock.innerText = `${year}년 ${month}월 ${date}일 (${day})\n${hour}:${minute}:${second}`;
+}
+
+setInterval(getTime, 1000);
