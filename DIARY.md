@@ -99,3 +99,11 @@ type이 달랐다
 todo.id가 string이었고 item.id가 number였다
 
 todo.id를 number화 해주니 끝났다.. 나는 멘탈이 회복됐다
+
+# 3.5
+
+TODO 저장 및 삭제가 모두 잘 작동한다.
+
+현재 시간을 실시간 표시를 구현해보자.
+
+intl
