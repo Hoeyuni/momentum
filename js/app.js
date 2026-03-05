@@ -59,12 +59,17 @@ function deleteTodo(e) {
   console.log("deleteTodo todo.id:", todo.id);
 
   todos = todos.filter((item) => {
-    item.id !== todo.id;
+    // item.id !== todo.id
     console.log("item.id", item.id);
+    console.log("item.id", typeof item.id);
     console.log("todo.id", todo.id);
-  });
+    console.log("todo.id", typeof todo.id);
 
+    return item.id !== +todo.id;
+  });
   console.log("deleteTodo after filter todos: ", todos);
+
+  saveTodo();
 }
 
 todoForm.addEventListener("submit", (e) => {

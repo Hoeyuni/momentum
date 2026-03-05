@@ -43,3 +43,59 @@
 ## 1.12
 
 - 오랜만에 스터디를 한다. 어떤 걸 해야할지 다 까먹었는데, 더듬어 기억해보아야겠다.
+
+## 3.3
+
+- 거의 2달만에 DIARY를 확인한다.
+- 지금 어디서부터 뭘 해야할지 모르겠다.
+- 일단 클로드에게 다음 뭘 하면 될지 물어봤다.
+  -> todo를 삭제하면 화면에서는 지워지지만 새로고침하면 그대로인데 이거부터 해결해라. 내가 해줄까 너가 할래? 라고 답변이 나와서 내가 한다고 했다.
+
+- 지금 TODO를 삭제(X버튼)하면 문제는
+  1. 화면에서 제거
+  2. 새로고침 하면 다시 생김
+     2-1. 배열에서 제거되지 않음
+     2-2. 그 말은 localstorage에 업데이트 되지 않음
+
+- X버튼을 누르면 그 div가 배열에서 삭제되어야 함
+  그 div의 id를 알고 있으니 가능
+
+- todos를 내가 지운 div의 id와 다른 애들만 남겨놓으면 됨
+
+- filter로 item.id !== todo.id만 return,
+  그 후 saveTodo() 함수로 지금 todos를 string화 해서 localstorage에 저장
+
+- deleteTodo의 흐름을 살펴보면
+  ex)
+
+todos = [A,B,C]
+localStorage = [A,B,C]
+
+B 삭제
+
+1. todo.remove() -> B 화면에서 사라짐
+2. todos = todos.filter()
+   2-1. todos = [A,C] -> B 제거됨
+3. saveTodo() -> localStorage = [A,C] 저장
+
+saveTodo()는 todos에 있는 것을 그냥 그대로 저장만 하는 함수
+
+지금 문제는 대체 왜 deleteTodo가 내가 원하는대로 작동이 안되는가???
+
+delete todos와 deleteTodo after filter todos
+
+콘솔이 똑같이 찍힌다
+
+그 말인 즉슨 filter가 작동하지 않는다
+
+그 말은 return item.id !== todo.id가 잘못됐다?
+
+아니다. 내가 지운 div의 id와 배열에 있는 todo.id가 분명히 일치한다.
+
+나는 멘탈이 완전히 나가버렸다
+
+type이 달랐다
+
+todo.id가 string이었고 item.id가 number였다
+
+todo.id를 number화 해주니 끝났다.. 나는 멘탈이 회복됐다
