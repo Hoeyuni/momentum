@@ -9,9 +9,11 @@
 
 <body class="w-full h-screen">
     <section class="overflow-hidden size-full flex flex-col justify-center items-center relative">
+        <p id="clock" class="absolute top-5 text-[30px] font-bold text-center whitespace-pre bg-clip-text text-transparent"
+            style="background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)"></p>
         <img src="/assets/webp/example1.webp" alt="Background Img"
             class="absolute inset-0 w-full h-full object-cover -z-10">
-        <div id="todo" class="flex flex-col space-y-3">
+        <div id="todo" class="absolute top-28 w-full flex flex-col items-center space-y-3">
         </div>
         <form id="todoForm" class="absolute bottom-5 w-full flex justify-center space-x-2">
             <input id="todoInput" type="text" class="bg-transparent border-b border-white text-white" />
