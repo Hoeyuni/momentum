@@ -114,3 +114,59 @@ filter((item) => item.id !== todo.id) >> 일치하지 않으면 놔둠
 innerText를 써서 표시했따
 
 setInterval를 사용해서 실시간으로 보여줬다
+
+# 3.9
+
+TODO 및 현재 시간 구현이 잘 되어있으므로 다음 할 일인
+
+- [ ] 새로 페이지에 접근 / 새로고침 하면 이미지 변경
+- [ ] 랜덤으로 고해상도 이미지를 페이지 background 적용
+
+- 디자인 예쁘게 수정
+
+-> 폰트 Noto Sans 폰트(클로드 추천) 적용
+-> <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+
+-> id="BgImage", 적용
+
+- bgImage.src = `https://picsum.photos/1920/1080?random=${Math.random()}`;
+
+- 남은 디자인은 클로드에게 맡김
+
+- intl로 자동 포맷팅 적용
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+
+Intl을 쓰면 전에 days 배열을 직접 만들어서 썼는데, 그럴 필요가 없다.
+
+year: numeric
+month: 2-digit
+day: 2-digit
+weekday: long
+
+locale: ko-KR
+
+결론
+
+- 이미지 랜덤 적용
+  ->`https://picsum.photos/1920/1080?random=${Math.random()}`;
+
+- intl 적용
+- intl은 javascript 내장 객체로, 국제화를 위한 기능이다
+  날짜, 숫자, 통화 등을 언어나 지역에 맞게 자동 포맷을 해준다.
+  내가 days 배열(일월화..)를 만들었는데 intl을 쓰면
+
+  const dateFormat = new Intl.DateTimeFormat("ko-KR", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  weekday: "long",
+  }).format(time);
