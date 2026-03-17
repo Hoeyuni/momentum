@@ -5,21 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Hoeyuni Momentum</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        #todo::-webkit-scrollbar {
+            display: none;
+        }
+
+        #todo {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
 
-<body class="w-full h-screen">
-    <section class="overflow-hidden size-full flex flex-col justify-center items-center relative">
-        <p id="clock" class="absolute top-5 text-[30px] font-bold text-center whitespace-pre bg-clip-text text-transparent"
-            style="background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)"></p>
-        <img src="/assets/webp/example1.webp" alt="Background Img"
-            class="absolute inset-0 w-full h-full object-cover -z-10">
-        <div id="todo" class="absolute top-28 w-full flex flex-col items-center space-y-3">
-        </div>
-        <form id="todoForm" class="absolute bottom-5 w-full flex justify-center space-x-2">
-            <input id="todoInput" type="text" class="bg-transparent border-b border-white text-white" />
-            <button type="submit" class="bg-white p-2 rounded-[10px]">저장</button>
-        </form>
+<body class="w-full h-screen bg-black">
+    <section class="overflow-hidden size-full flex flex-col items-center relative">
+        <!-- 배경 이미지 + 어두운 오버레이 -->
+        <img id="bgImage" alt="Background Img"
+            class="absolute inset-0 w-full h-full object-cover opacity-70">
 
+        <!-- 시계 -->
+        <div class="relative z-10 mt-12 text-center">
+            <p id="clock-date" class="text-white/80 text-lg font-light tracking-widest"></p>
+            <p id="clock-time" class="text-white text-7xl font-bold tracking-tight mt-1"
+                style="text-shadow: 0 2px 20px rgba(0,0,0,0.3)"></p>
+        </div>
+
+        <!-- TODO 리스트 -->
+        <div id="todoWrapper" class="relative z-10 mt-12 max-h-[50vh]">
+            <div id="todo" class="flex flex-col items-center space-y-2 max-h-[50vh] overflow-y-auto px-4">
+            </div>
+        </div>
+
+        <!-- TODO 입력 폼 -->
+        <form id="todoForm" class="absolute bottom-8 z-10 flex items-center space-x-3">
+            <input id="todoInput" type="text" placeholder="할 일을 입력하세요"
+                class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-full px-5 py-3 text-white placeholder-white/50 outline-none focus:border-white/60 focus:bg-white/15 transition-all w-72" />
+            <button type="submit"
+                class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-5 py-3 rounded-full hover:bg-white/30 transition-all">저장</button>
+        </form>
     </section>
     <script src="/js/app.js" defer type="module"></script>
 </body>
