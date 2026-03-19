@@ -170,3 +170,80 @@ locale: ko-KR
   day: "2-digit",
   weekday: "long",
   }).format(time);
+
+# 3.17
+
+- 배경 이미지를 하루에 하나씩 랜덤으로 나오게끔 하려면, 그 하루동안은 어떤 id값이 같아야 하고, 다음 날이 되면 바뀌어야 한다.
+  -> 년월일을 받아야 한다.
+
+지금은 Math.random()을 써서 새로고침할 때마다 바뀌게끔 했는데, 날짜를 기반으로 id를 고정해보자
+
+지금은 picsum으로 랜덤 이미지를 뽑아내는데
+
+`https://picsum.photos/1920/1080?random=${Math.random()}`;
+
+-> `https://picsum.photos/id/{image}/size`
+
+{image}에 id를 넣으면 되겠다.
+
+id니까 number화를 시키자
+
+getMonth()는 0(1월) ... 3월이니까 2 -> +1 해주자
+
+03월 04월 이렇게 뽑아내려면 padStart() 함수를 써야하는데, 앞의 값이 string이어야 한다
+// https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+
+2026
+String(getMonth()+1).padStart(2,"0")
+=> "03"
+
+getDate()도 똑같이 String(getDate()).padStart(2,"0");
+1일이면 -> "01"
+
+이제 년 월 일을 조립해서 Number화 -> id는 number로
+
+Number(${year}${month}${day})
+
+-> 엑박? 뭐지
+-> 10분 고민하다가 리서치 "picsum 엑박"
+-> id에 1,2,3,4 넣어보면 잘 나옴
+-> 클로드에 물어보니 이미지 id가 0~1083까지 있다. 결국 20260317 숫자가 너무 컸던 것.
+-> 대충 1000으로 나눈 나머지를 쓰자
+
+Number(${year}${month}${day}) % 1000
+
+# 3.19
+
+- 랜덤 이미지 -> 시드로 수정
+
+지금 방식
+-> https://picsum.photos/${getDate()}/697/1920/1080
+// % 1084로 ID 범위 제한 필요
+
+seed 방식
+-> https://picsum.photos/seed/${getDate()}/1920/1080
+// 문자열 그대로 seed로 사용
+
+seed 방식은 타입이 number일 필요가 없다
+
+- 유저마다 다르게 적용
+  -> 로컬스토리지에 저장하자.
+  1. 첫 접속일 경우
+     -> localStorage 조회(localStorage.getItem())
+     -> localStorage에 userId가 없음
+     -> useId 생성(localStorage.setItem())
+     -> localStorage에 저장
+     -> get해서 사용
+  2. 재접속일 경우
+     -> localStorage 조회
+     -> localStorage에 userId가 있음
+     -> get해서 사용
+
+'Math.random()-날짜'
+
+localStorage.getItem("userId")
+->key가 있으면 저장된 값 반환
+->key가 없으면 null
+localStorage.setItem("userId", userId)
+-> key가 있으면 기존 값에 덮어 씌움
+-> key가 없으면 새로 생성
