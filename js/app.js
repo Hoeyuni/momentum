@@ -6,26 +6,26 @@ const clockTime = document.getElementById("clock-time");
 const bgImage = document.getElementById("bgImage");
 const todoWrapper = document.getElementById("todoWrapper");
 
+function getUserId() {
+  let userId = localStorage.getItem("userId");
+  if (!userId) {
+    userId = String(Math.random());
+    localStorage.setItem("userId", userId);
+  }
+  return userId;
+}
+
 function getDate() {
   const time = new Date();
   const year = time.getFullYear();
   const month = String(time.getMonth() + 1).padStart(2, "0");
   const day = String(time.getDate()).padStart(2, "0");
-  const test = Number(`${year}${month}${day}`);
-  console.log("test:", test);
-
-  // 특정 이미지를 가져오려면 https://picsum.photos/id/{id}/{width}/{height} 형식을 사용하세요
-  const numberDate = Number(`${year}${month}${day}`) % 1084;
-
-  console.log("year: ", year);
-  console.log("month: ", month);
-  console.log("day: ", day);
-  return numberDate;
+  return `${year}${month}${day}`;
 }
 
-console.log("getDate(): ", getDate());
+const randomSeed = `${getUserId()}-${getDate()}`;
 
-bgImage.src = `https://picsum.photos/id/${getDate()}/1920/1080`;
+bgImage.src = `https://picsum.photos/seed/${randomSeed}/1920/1080`;
 
 let todos = [];
 
@@ -112,6 +112,8 @@ function getTime() {
     day: "2-digit",
     weekday: "long",
   }).format(time);
+
+  console.log("dateFormat:", dateFormat);
 
   // padStart(목표 길이, 채울 문자)
   const hour = String(time.getHours()).padStart(2, "0");
