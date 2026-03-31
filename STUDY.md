@@ -247,3 +247,41 @@ localStorage.getItem("userId")
 localStorage.setItem("userId", userId)
 -> key가 있으면 기존 값에 덮어 씌움
 -> key가 없으면 새로 생성
+
+# 3.23
+
+- TODO에 카테고리
+
+여러 방식을 생각해봤다.
+
+1. 카테고리 인풋을 만들어 유저가 직접 입력하도록 할지
+2. 일단은 카테고리를 몇 개 지정해서 드랍다운으로 선택하게끔 할지
+
+1번은 카테고리 자유도가 높지만 매번 카테고리를 직접 입력해야 하고, 카테고리가 너무 많아질 수 있다
+
+2번은 카테고리를 이미 정해진 것에서 골라야 해서 한정되지만 사용성이 좀 더 좋을 거 같다
+
+2번 방향으로 해보자.
+
+select 태그로 옵션을 추가하자
+
+<select id="todoCategory">
+<option value="0">
+</option>
+<select>
+
+select 드랍다운 디자인 수정
+
+getElementById로 select 요소를 가져오고
+newTodo에 category value 추가
+
+const todoCategory = document.getElementById.("todoCategory")
+
+X 버튼 밖으로 뺴서 디자인 수정
+
+카테고리는 일단 기본, 업무, 할 일 3개만 고정
+
+submit할때 category 추가
+카테고리 별로 그룹핑 해야한다
+카테고리들에는 폰트로 위계를 준다
+카테고리 좌측정렬, 투두들 들여쓰기
