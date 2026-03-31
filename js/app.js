@@ -5,6 +5,7 @@ const clockDate = document.getElementById("clock-date");
 const clockTime = document.getElementById("clock-time");
 const bgImage = document.getElementById("bgImage");
 const todoWrapper = document.getElementById("todoWrapper");
+const todoCategory = document.getElementById("todoCategory");
 
 function getUserId() {
   let userId = localStorage.getItem("userId");
@@ -38,24 +39,28 @@ if (TODO_LIST) {
 }
 
 function paintTodoList(newTodo) {
+  const todoRow = document.createElement("div");
+  todoRow.id = newTodo.id;
+  todoRow.className = "flex items-center space-x-2";
+
+  const todoDeleteButton = document.createElement("button");
+  todoDeleteButton.innerText = "✕";
+  todoDeleteButton.className =
+    "text-red-500 hover:text-red-300 text-lg font-bold transition-colors";
+  todoDeleteButton.addEventListener("click", deleteTodo);
+
   const todoDiv = document.createElement("div");
-  todoDiv.id = newTodo.id;
   todoDiv.className =
-    "flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2 border border-white/20";
+    "bg-white/10 backdrop-blur-sm rounded-full px-5 py-2 border border-white/20 w-fit";
 
   const todoP = document.createElement("p");
   todoP.innerText = newTodo.text;
   todoP.className = "text-white text-lg";
 
-  const todoDeleteButton = document.createElement("button");
-  todoDeleteButton.innerText = "✕";
-  todoDeleteButton.className =
-    "text-red-500 hover:text-red-300 text-sm ml-2 transition-colors";
-  todoDeleteButton.addEventListener("click", deleteTodo);
-
   todoDiv.appendChild(todoP);
-  todoDiv.appendChild(todoDeleteButton);
-  todo.appendChild(todoDiv);
+  todoRow.appendChild(todoDeleteButton);
+  todoRow.appendChild(todoDiv);
+  todo.appendChild(todoRow);
 }
 
 function saveTodo() {
@@ -92,6 +97,7 @@ todoForm.addEventListener("submit", (e) => {
   const newTodo = {
     id: Math.random(),
     text: todoInput.value,
+    category: todoCategory.value,
   };
   if (newTodo.text === "") {
     return;

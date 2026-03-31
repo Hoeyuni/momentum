@@ -38,12 +38,21 @@
 
         <!-- TODO 리스트 -->
         <div id="todoWrapper" class="relative z-10 mt-12 max-h-[50vh]">
-            <div id="todo" class="flex flex-col items-center space-y-2 max-h-[50vh] overflow-y-auto px-4">
+            <div id="todo" class="flex flex-col space-y-2 max-h-[50vh] overflow-y-auto px-4 w-96">
             </div>
         </div>
 
         <!-- TODO 입력 폼 -->
         <form id="todoForm" class="absolute bottom-8 z-10 flex items-center space-x-3">
+            <div class="relative">
+                <select id="todoCategory"
+                    class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-full pl-4 pr-8 py-3 text-white outline-none focus:border-white/60 transition-all appearance-none cursor-pointer">
+                    <option value="기본">기본</option>
+                    <option value="업무">업무</option>
+                    <option value="할일">할일</option>
+                </select>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none text-xs">▼</span>
+            </div>
             <input id="todoInput" type="text" placeholder="할 일을 입력하세요"
                 class="bg-white/10 backdrop-blur-sm border border-white/30 rounded-full px-5 py-3 text-white placeholder-white/50 outline-none focus:border-white/60 focus:bg-white/15 transition-all w-72" />
             <button type="submit"
